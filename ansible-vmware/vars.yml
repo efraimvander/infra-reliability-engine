@@ -1,0 +1,13 @@
+vcenter_hostname: "192.168.1.10"
+vcenter_username: "root"
+vcenter_password: "password"
+
+datacenter: "ha-datacenter"
+datastore: "datastore1"
+network: "VM Network"
+
+vm_name: "vm-ansible-test"
+vm_cpu: 2
+vm_ram: 4096
+vm_disk: 40
+guest_id: "ubuntu64Guest"
