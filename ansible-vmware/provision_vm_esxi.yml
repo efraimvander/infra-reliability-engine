@@ -1,0 +1,71 @@
+---
+# Provision VM on VMware ESXi using Ansible
+# Requirements:
+# pip install pyvmomi
+# ansible-galaxy collection install community.vmware
+#
+# Usage:
+# ansible-playbook provision_vm_esxi.yml
+
+- name: Provision VM on ESXi
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+
+    # VMware credentials
+    vcenter_hostname: "192.168.1.10"
+    vcenter_username: "root"
+    vcenter_password: "password"
+    validate_certs: false
+
+    # Infrastructure
+    datacenter: "ha-datacenter"
+    datastore: "datastore1"
+    network: "VM Network"
+
+    # VM configuration
+    vm_name: "ansible-demo-vm"
+    vm_cpu: 2
+    vm_ram: 4096
+    vm_disk: 40
+    guest_id: "ubuntu64Guest"
+
+  tasks:
+
+    - name: Create and power on VM
+      community.vmware.vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: "{{ validate_certs }}"
+
+        name: "{{ vm_name }}"
+        state: poweredon
+
+        datacenter: "{{ datacenter }}"
+        datastore: "{{ datastore }}"
+
+        hardware:
+          memory_mb: "{{ vm_ram }}"
+          num_cpus: "{{ vm_cpu }}"
+
+        disk:
+          - size_gb: "{{ vm_disk }}"
+            type: thin
+            datastore: "{{ datastore }}"
+
+        networks:
+          - name: "{{ network }}"
+            type: dhcp
+
+        guest_id: "{{ guest_id }}"
+        wait_for_ip_address: true
+
+      register: vm_output
+
+
+    - name: Show VM information
+      debug:
+        var: vm_output.instance.ipv4
