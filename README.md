@@ -1,19 +1,51 @@
-# Don't Panic Sysadmin
+# 🚀 Infra Reliability Engine
 
-Kit de sobrevivência para administradores de sistemas.
+Production-ready infrastructure engine focused on **high availability, zero downtime deployments and self-healing systems**.
 
-Quando algo quebra em produção e o cérebro trava, abra este repositório.
+---
 
-Conteúdo:
+## 🚨 Problem
 
-- troubleshooting Linux
-- Docker
-- Nextcloud
-- Netbox
-- Active Directory
-- n8n
-- incident response
-- comandos essenciais
-- scripts úteis
+Modern infrastructure fails due to:
+- manual deployments
+- lack of health checks
+- no automated recovery
+- poor observability
 
-Objectivo: resolver problemas rápido.
+---
+
+## 💡 Solution
+
+This project provides:
+- Zero-downtime deployment
+- Automated rollback
+- Health monitoring
+- Self-healing mechanisms
+
+---
+
+## 🏗 Architecture
+
+- Nginx (load balancing)
+- Docker (services)
+- Prometheus + Grafana (monitoring)
+- Ansible (automation)
+
+---
+
+## ⚙️ Features
+
+- Blue/Green deployments
+- Health checks
+- Auto-restart services
+- Log monitoring
+- Alert simulation
+
+---
+
+## 🚀 Quick Start
+
+```bash
+git clone https://github.com/efraimvander/infra-reliability-engine
+cd infra-reliability-engine
+docker-compose up -d
